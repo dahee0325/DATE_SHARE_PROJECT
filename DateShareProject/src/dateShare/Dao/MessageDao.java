@@ -51,24 +51,25 @@ public class MessageDao {
 		return rCnt;
 	}
 
-	public Message select(Connection conn, int m_to) {
+	public Message select(Connection conn, int m_num) {
 
 		Message message = null;
 
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select * from message where m_to=?";
+		String sql = "select * from message where m_num=?";
 
 		try {
 
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, m_to);
+			pstmt.setInt(1, m_num);
 
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
 				message = new Message();
+				message.setM_num(rs.getInt(1));
 				message.setU_num(rs.getInt(2));
 				message.setM_title(rs.getString(3));
 				message.setM_content(rs.getString(4));
@@ -110,6 +111,7 @@ public class MessageDao {
 		return totalCnt;
 	}
 
+	
 	public List<Message> selectList(Connection conn, int firstRow, int endRow) {
 
 		List<Message> list = new ArrayList<Message>();
@@ -117,24 +119,33 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select message_id, guest_name, password, message from ( "
-				+ "select rownum rnum, message_id, guest_name, password, message from ("
-				+ "select * from guestbook_message m order by m.message_id desc"
-				+ ") where rownum <= ? ) where rnum >= ?";
-
+		//String sql = "select m_num,d.u_name, m_title, m_content, m_writedate,m_to"
+		//		+ "from ( select rownum rnum, m_num, u_num, m_title, m_content,m_writedate,m_to"
+		//		+ " from ( select * from message m order by m.m_num desc) where rownum <= ? ) join dateuser d"
+		//		+ "using(u_num) where rnum >= ?";
+		
+		String sql = "select m_num,u_num, m_title, m_content, m_writedate,m_to from ("
+					+ " select rownum rnum, m_num, u_num, m_title, m_content,m_writedate,m_to from ("
+					+ " select * from message m order by m.m_num desc"
+					+ ") where rownum <=?"
+					+ ") where rnum >= ?";
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, endRow);
 			pstmt.setInt(2, firstRow);
+			 
 
 			rs = pstmt.executeQuery();
 
 			while (rs.next()) {
 				Message msg = new Message();
-				msg.setId(rs.getInt(1));
-				msg.setGuestName(rs.getString(2));
-				msg.setPassword(rs.getString(3));
-				msg.setMessage(rs.getString(4));
+				msg.setM_num(rs.getInt(1));
+				msg.setU_num(rs.getInt(2));
+				msg.setM_title(rs.getString(3));
+				msg.setM_content(rs.getString(4));
+				msg.setM_writedate(rs.getDate(5));
+				msg.setM_to(rs.getString(6));
 
 				list.add(msg);
 			}
@@ -146,18 +157,19 @@ public class MessageDao {
 
 		return list;
 	}
+	
 
-	public int deleteMessage(Connection conn, int messageId) throws SQLException {
+	public int deleteMessage(Connection conn, int m_num) throws SQLException {
 
 		int resultCnt = 0;
 		// PreparedStatement 객체 생성
 		PreparedStatement pstmt = null;
 
-		String sql = "delete from guestbook_message where message_id=?";
+		String sql = "delete from message where m_num=?";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, messageId);
+			pstmt.setInt(1, m_num);
 
 			resultCnt = pstmt.executeUpdate();
 

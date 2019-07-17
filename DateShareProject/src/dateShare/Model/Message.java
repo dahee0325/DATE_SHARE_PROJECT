@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Message {
 	
+	private int m_num; 		  //메세지 번호
 	private int u_num; 		  //보낸사람 회원번호
 	private String m_to; 	  //받는사람
 	private String m_title;   //쪽지제목
@@ -41,6 +42,12 @@ public class Message {
 	}
 	public void setU_num(int u_num) {
 		this.u_num = u_num;
+	}
+	public int getM_num() {
+		return m_num;
+	}
+	public void setM_num(int m_num) {
+		this.m_num = m_num;
 	}
 	
 	

@@ -4,9 +4,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <title>DATE SHARE : MESSAGE</title>
+    <title>DATE SHARE : MESSAGE전송</title>
 </head>
 <link href="../css/index.css" rel="stylesheet" type="text/css">
+<link href="../css/content.css" rel="stylesheet" type="text/css">
 <style></style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
@@ -21,15 +22,26 @@
             <%@include file="../frame/nav.jsp" %>
         </div>
         <div id="content">
+           <div id="content_title">
+               <h2>MESSAGE SEND</h2>
+           </div>
+           <div id="cform_wrap">
             <form action="writeMessage.jsp" method="post">
-            	받는사람 : <input type="text" name="m_to"><br>
-            	제목 : <input type="text" name="m_title"><br>
-            	내용 : <input type="text" name="m_content"><br>
-            	<input type="submit">
+                <span>보내는 사람 </span><br>
+            	<span>받는 사람</span><input class="c_input" type="text" name="m_to"><br>
+            	<span>제목</span>
+                <input class="c_input" type="text" name="m_title"><br>
+                <span>내용</span>
+                <textarea class="c_input_t" name="m_content" rows="5"></textarea><br>
+            	<input class="c_btn" type="submit" value="보내기">
+            	<a id="c_btna" href="messageList.jsp">이전으로</a>
             </form>
+            </div>
         </div>
         <div id="footer">
             <%@include file="../frame/footer.jsp" %>
         </div>
     </div>
 </div>
+</body>
+</html>

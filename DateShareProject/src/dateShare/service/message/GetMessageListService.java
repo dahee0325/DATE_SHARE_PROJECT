@@ -22,7 +22,7 @@ public class GetMessageListService {
 		}
 		
 		//1. 한페이지에 보여줄 게시글의 개수
-		private static final int MESSAGE_COUNT_PER_PAGE = 15;
+		private static final int MESSAGE_COUNT_PER_PAGE = 8;
 		
 		public MessageListView getMessageList(int pageNumber) {
 			

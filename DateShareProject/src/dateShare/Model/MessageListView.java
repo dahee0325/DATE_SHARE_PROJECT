@@ -19,7 +19,6 @@ public class MessageListView {
 		this.messageTotalCount = messageTotalCount;
 		this.currentPageNumber = currentPageNumber;
 		this.messageList = messageList;
-		//this.pageTotalCount = pageTotalCount; : 초기값을 생성해줄거임 따로
 		this.messageCountPerPage = messageCountPerPage;
 		this.firstRow = firstRow;
 		this.endRow = endRow;
@@ -29,7 +28,6 @@ public class MessageListView {
 	
 	private void calcuratePageTotalCount() {
 		// TODO Auto-generated method stub
-		//개수세는거라 0보다 작은건없음
 		if(messageTotalCount == 0) {
 			pageTotalCount = 0;
 		}else {
@@ -87,7 +85,7 @@ public class MessageListView {
 	
 	
 	public boolean isEmpty() {
-		return messageCountPerPage == 0;
+		return currentPageNumber == 0;
 	}
 	
 	
