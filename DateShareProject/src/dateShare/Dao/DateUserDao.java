@@ -24,12 +24,12 @@ private static DateUserDao dao = new DateUserDao();      //객체 생성
 	
 	
 	
-	public int insert(Connection conn, DateUser dUser ) {   //메서드
+	public void insert(Connection conn, DateUser dUser ) {   //메서드
 	
-		int rCnt = 0;
+
 		PreparedStatement pstmt = null;
 		
-		String sql = "insert into dateuser values(u_unum_seq.nextVal,?, ?, ? ,?,sysdate,?)";
+		String sql = "insert into dateuser values(dateuser_seq.nextVal,?, ?, ? ,?,sysdate,?)";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -39,7 +39,7 @@ private static DateUserDao dao = new DateUserDao();      //객체 생성
 			pstmt.setString(4, dUser.getU_bday());
 			pstmt.setString(5, dUser.getU_gender());
 			
-			rCnt =  pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -50,13 +50,11 @@ private static DateUserDao dao = new DateUserDao();      //객체 생성
 				pstmt.close();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();     //stacktrace : stack에 메서드가 호출된 기록을 남김
-										 //printStackTrace(): 에러가 발생한 메서드의 호출기록 출력
+				e.printStackTrace();    
 			}
 			
 		}	
-		
-			return rCnt;
+
 	}
 	
 	
@@ -67,7 +65,7 @@ public DateUser login(Connection conn, String u_id) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select u_id,u_pw from dateuser where u_id=?";
+		String sql = "select u_num, u_id,u_pw,u_name from dateuser where u_id=?";
 		
 		try {
 			
@@ -78,12 +76,11 @@ public DateUser login(Connection conn, String u_id) {
 			
 			if(rs.next()) {
 				dUser = new DateUser();
-				dUser.setU_id(rs.getString(1));
-				dUser.setU_pw(rs.getString(2));
-				
+				dUser.setU_num(rs.getInt(1));
+				dUser.setU_id(rs.getString(2));
+				dUser.setU_pw(rs.getString(3));
+				dUser.setU_name(rs.getString(4));
 			}
-			
-			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

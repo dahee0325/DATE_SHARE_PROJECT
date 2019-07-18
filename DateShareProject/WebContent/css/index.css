@@ -12,10 +12,12 @@ html {
 	background-size: cover;
 }
 
+
 a {
 	text-decoration: none;
 	color: black;
 }
+
 
 
 #main_wrap {
@@ -37,10 +39,16 @@ a {
 #my {
 	text-align: right;
 	margin: 10px 15px 0 0;
+	font-size: 14px;
 }
 
 #my a {
 	font-size: 14px;
+}
+
+#my_info {
+	display: inline-block;
+	padding-right: 20px;
 }
 
 #nav {
@@ -86,12 +94,20 @@ a {
 	padding: 3px 0;
 }
 
-.input_b {
+.input_b, .input_ba {
+	display: inline-block;
 	width: 100%;
 	background-color: transparent;
 	border: solid 1px;
 	padding: 8px;
+	font-size: 13px;
+	text-align: center;
 }
+
+.input_ba {
+	width: 94%;
+}
+
 
 .input_b:first-child {
 	margin-bottom: 8px;

@@ -7,7 +7,7 @@
     <title>DATE SHARE : MESSAGE전송</title>
 </head>
 <link href="../css/index.css" rel="stylesheet" type="text/css">
-<link href="../css/message/content.css" rel="stylesheet" type="text/css">
+<link href="../css/content.css" rel="stylesheet" type="text/css">
 <style></style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>

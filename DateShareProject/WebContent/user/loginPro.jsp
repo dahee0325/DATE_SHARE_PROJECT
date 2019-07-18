@@ -15,20 +15,16 @@
 	
 	DateUser dUser = service.login(u_id);
 	
-	if(u_id != null && dUser.getU_id() != null && dUser.getU_id().equals(u_id)){
+	if(dUser.getU_id() != null && dUser.getU_id().equals(u_id)){
 		
-		if(u_pw != null && dUser.getU_pw() != null && dUser.getU_pw().equals(u_pw))
+		if(dUser.getU_pw() != null && dUser.getU_pw().equals(u_pw))
 		
-		// 회원 정보가 존재 && 비밀번호가 일치
-		// 세션에 회원 로그인 정보를 저장
-		session.setAttribute("loginInfo", dUser.toLoginInfo());
+		session.setAttribute("userInfo", dUser);
 		
-		// 로그인 처리 후 메인페이지로 이동		
-		response.sendRedirect("../main.jsp");  //web.xml에서 <welcome-file>index.html</welcome-file>로
-														// 설정을 했으므로 index.jsp로 이동
-														
+		response.sendRedirect("../main.jsp"); 
+
 	}else{
-		out.println("아이디와 비밀번호를 확인하세요.");
+		out.println("<script> alert(\'아이디랑 패스워드를 확인하세요.\'); history.go(-1); </script>");	
 	}
 	
 	

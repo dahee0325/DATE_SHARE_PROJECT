@@ -72,10 +72,4 @@ public class DateUser {
 		this.u_gender = u_gender;
 	}
 	
-	public LoginInfo toLoginInfo() {
-		
-		return new LoginInfo(u_num, u_id);
-		
-	}
-	
 }

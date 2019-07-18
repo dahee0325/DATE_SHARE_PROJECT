@@ -9,10 +9,11 @@
 <link href="../css/index.css" rel="stylesheet" type="text/css">
 <style></style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+	
+</script>
 </head>
 <body>
-
-
 <div id="wrap">
     <div id="main_wrap">
         <div id="header">
@@ -30,25 +31,25 @@
 		<table>
 			<tr>
 				<td>아이디(이메일)</td>
-				<td><input type="email" name="u_id"> 
+				<td><input type="text" name="u_id" required> 
 					<input type="button" name="confirm_id" value="중복확인"></td>
 			</tr>
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" name="u_pw"> </td>
+				<td><input type="password" name="u_pw" required> </td>
 			</tr>
 			<tr>
 				<td>이름</td>
-				<td><input type="text" name="u_name"> </td>
+				<td><input type="text" name="u_name" required> </td>
 			</tr>
 			<tr>
 				<td>생년월일</td>
-				<td><input type="date" name="u_bday"></td>
+				<td><input type="date" name="u_bday" required></td>
              </tr>
              <tr>
              	<td>성별</td>
-             	<td><input type="radio" name=u_gender value="m">남자</td>
-             	<td><input type="radio" name=u_gender value="w">여자</td>
+             	<td><input type="radio" name=u_gender value="M">남자</td>
+             	<td><input type="radio" name=u_gender value="F">여자</td>
              </tr>  
 			<tr>
 				<td></td>

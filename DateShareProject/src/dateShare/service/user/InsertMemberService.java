@@ -3,7 +3,7 @@ package dateShare.service.user;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import dateShare.Dao.dateUserDao;
+import dateShare.Dao.DateUserDao;
 import dateShare.Model.DateUser;
 import jdbc.ConnectionProvider;
 
@@ -17,13 +17,8 @@ public class InsertMemberService {
 
 	private InsertMemberService() {}
 
-	public int insert(DateUser dUser) {
+	public void insert(DateUser dUser) {
 
-		int rCnt = 0;
-
-		// 1. Connection 생성
-		// 2. dao 생성
-		// 3. insert 메서드 실행
 
 		Connection conn = null;
 
@@ -31,16 +26,15 @@ public class InsertMemberService {
 
 			conn = ConnectionProvider.getConnection();
 
-			dateUserDao dao = dateUserDao.getInstance();
+			DateUserDao dao = DateUserDao.getInstance();
 
-			rCnt = dao.insert(conn, dUser);
+			dao.insert(conn, dUser);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return rCnt;
 
 	}
 }
