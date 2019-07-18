@@ -43,8 +43,7 @@ public class DeleteMessageService {
 				//2-1. 게시물이 존재 하지않으면 예외 처리
 				throw new MessageNotFoundException(m_num+"번의 메세지가 존재하지 않습니다.");
 			}
-			
-			//commit
+
 			resultCnt = dao.deleteMessage(conn, m_num);
 			
 			

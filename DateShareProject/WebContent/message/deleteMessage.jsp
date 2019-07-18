@@ -1,26 +1,33 @@
+<%@page import="dateShare.exception.message.MessageNotFoundException"%>
+<%@page import="java.sql.SQLException"%>
 <%@page import="dateShare.service.message.DeleteMessageService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<%@page trimDirectiveWhitespaces="true" %>
 <%
-
 	String num = request.getParameter("m_num");
-	
+
 	if (num != null) {
 		int m_num = Integer.parseInt(num);
+
 		//성공여부 cnt
 		int resultCnt = 0;
-
+		//성공여부
+		boolean chk = false;
+		//예외가 발생했을때 띄울 메세지
+		String msg = "";
+		
 		//서비스 객체 생성
-		DeleteMessageService del_service = DeleteMessageService.getInstance();
-
-		resultCnt = del_service.deleteMessage(m_num);
+		DeleteMessageService service = DeleteMessageService.getInstance();
+		
+		try {
+			resultCnt = service.deleteMessage(m_num);
+			chk=true;
+			out.print(m_num);
+		} catch (SQLException e) {
+			msg = e.getMessage();
+		} catch (MessageNotFoundException e) {
+			msg = e.getMessage();
+		}
+	}
 %>
-<script>
-$(document).ready(function() {
-	
-	alert( resultCnt + '개 메세지가 삭제되었습니다.');
-	location.href='messageList.jsp';
-	
-});
-</script>

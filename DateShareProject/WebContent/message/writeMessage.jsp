@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>DATE SHARE : MESSAGE</title>
 <link href="../css/index.css" rel="stylesheet" type="text/css">
-<link href="../css/content.css" rel="stylesheet" type="text/css">
+<link href="../css/message/content.css" rel="stylesheet" type="text/css">
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>

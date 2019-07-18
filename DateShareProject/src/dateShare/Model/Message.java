@@ -10,7 +10,7 @@ public class Message {
 	private String m_title;   //쪽지제목
 	private String m_content; //쪽지내용
 	private Date m_writedate; //보낸시간
-	
+	private String m_date; //형식이 바뀐 시간
 	
 	
 	public String getM_to() {
@@ -48,6 +48,12 @@ public class Message {
 	}
 	public void setM_num(int m_num) {
 		this.m_num = m_num;
+	}
+	public String getM_date() {
+		return m_date;
+	}
+	public void setM_date(String m_date) {
+		this.m_date = m_date;
 	}
 	
 	

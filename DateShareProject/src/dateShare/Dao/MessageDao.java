@@ -84,6 +84,42 @@ public class MessageDao {
 
 		return message;
 	}
+	
+	public Message selectShow(Connection conn, int m_num) {
+
+		Message message = null;
+
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql = "select m_num, u_num,m_title,m_content, to_char(message.m_writedate, 'MM-DD HH24:MI'), m_to from message where m_num = ?";
+
+		try {
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, m_num);
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				message = new Message();
+				message.setM_num(rs.getInt(1));
+				message.setU_num(rs.getInt(2));
+				message.setM_title(rs.getString(3));
+				message.setM_content(rs.getString(4));
+				message.setM_date(rs.getString(5));
+				message.setM_to(rs.getString(6));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return message;
+	}
+	
+	
 
 	public int selectCount(Connection conn) {
 		Statement stmt = null;

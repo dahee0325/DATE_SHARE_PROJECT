@@ -27,11 +27,29 @@
 <meta charset="UTF-8">
 <title>DATE SHARE : MESSAGE</title>
 <link href="../css/index.css" rel="stylesheet" type="text/css">
-<link href="../css/content.css" rel="stylesheet" type="text/css">
+<link href="../css/message/content.css" rel="stylesheet" type="text/css">
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
+function deleteM(id) {
+	
+	if(confirm("정말로 삭제하시겠습니까?")) {
+		
+		$.ajax({
+            url: 'deleteMessage.jsp',
+            type: 'GET',
+            data: {
+            	m_num: id
+            },
+            success: function (data) {
+            	alert(data+"번의 메세지가 삭제되었습니다.");
+            	location.reload();
+            }
+        });
+	}
+	
+}
 
 </script>
 </head>
@@ -61,7 +79,6 @@
 							<td>날짜</td>
 							<td></td>
 						</tr>
-
 						<%
 							if (viewData.isEmpty()) {
 						%>
@@ -75,12 +92,11 @@
 						%>
 						<tr>
 							<td><%=message.getM_num()%></td>
-							<td><a><%=message.getM_title()%></a></td>
+							<td><a href="messageShow.jsp?m_num=<%= message.getM_num() %>"><%=message.getM_title()%></a></td>
 							<td><%=message.getU_num()%></td>
 							<td><%=message.getM_writedate()%></td>
-							<td>삭제하기</td>
+							<td><a onclick="deleteM(<%= message.getM_num() %>)">삭제하기</a></td>
 						</tr>
-
 						<%
 						}
 					}
@@ -90,8 +106,7 @@
 						//[1],[2],[3] 페이지 번호
 						for (int i = 1; i <= viewData.getPageTotalCount(); i++) {
 					%>
-					<a href="messageList.jsp?page=<%=i%>"> [ <%=i%> ]
-					</a>
+					<a href="messageList.jsp?page=<%=i%>"> [ <%=i%> ]</a>
 					<%
 						}
 				%>

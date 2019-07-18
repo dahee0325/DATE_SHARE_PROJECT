@@ -7,7 +7,7 @@
     <title>DATE SHARE : MESSAGE전송</title>
 </head>
 <link href="../css/index.css" rel="stylesheet" type="text/css">
-<link href="../css/content.css" rel="stylesheet" type="text/css">
+<link href="../css/message/content.css" rel="stylesheet" type="text/css">
 <style></style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
@@ -28,11 +28,11 @@
            <div id="cform_wrap">
             <form action="writeMessage.jsp" method="post">
                 <span>보내는 사람 </span><br>
-            	<span>받는 사람</span><input class="c_input" type="text" name="m_to"><br>
-            	<span>제목</span>
-                <input class="c_input" type="text" name="m_title"><br>
-                <span>내용</span>
-                <textarea class="c_input_t" name="m_content" rows="5"></textarea><br>
+            	<span><label for="to">받는사람</label></span><input id="to" class="c_input" type="text" name="m_to"><br>
+            	<span><label for="title">제목</label></span>
+                <input id="title" class="c_input" type="text" name="m_title"><br>
+                <span><label for="text">내용</label></span>
+                <textarea id="text" class="c_input_t" name="m_content" rows="5"></textarea><br>
             	<input class="c_btn" type="submit" value="보내기">
             	<a id="c_btna" href="messageList.jsp">이전으로</a>
             </form>
