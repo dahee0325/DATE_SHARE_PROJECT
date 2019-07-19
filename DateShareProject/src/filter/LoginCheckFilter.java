@@ -17,6 +17,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
+@WebFilter("/message/*")
 public class LoginCheckFilter implements Filter {
 
     /**
@@ -51,24 +52,19 @@ public class LoginCheckFilter implements Filter {
 		
 		boolean loginChk = false;
 
-		if(session.getAttribute("userInfo") != null) {
+		if(session != null && session.getAttribute("userInfo") != null) {
 			
 			loginChk = true;
 		}
 		
 		if(loginChk) {
 			chain.doFilter(request, response);
-			resp.sendRedirect("main.jsp");
 		}else {
-			//RequestDispatcher dispatcher = request.getRequestDispatcher("/0626/session/member/loginForm.jsp");
-			//실행
-			//dispatcher.forward(request, response);
-			
-			resp.sendRedirect(req.getContextPath());
+			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		}
 		
 		// pass the request along the filter chain
-		chain.doFilter(request, response);
+		//chain.doFilter(request, response);
 	}
 
 	/**

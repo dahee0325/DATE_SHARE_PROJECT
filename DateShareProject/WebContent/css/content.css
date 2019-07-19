@@ -183,3 +183,9 @@ a {
 	border: solid 1px;
 	margin: 10px 5px 100px 0;
 }
+
+
+#cform_wrap label{
+	
+	font-weight: bold;
+}
