@@ -25,6 +25,11 @@ a {
 	margin: auto;
 }
 
+.input_t, .input_r, .input_ba{
+	font-weight: normal;
+}
+
+
 #logo a{
 	display: block;
 	text-align: left;
@@ -47,8 +52,9 @@ a {
 }
 
 #my_info {
-	display: inline-block;
+	display:inline-block;
 	padding-right: 20px;
+	
 }
 
 #nav {
@@ -94,6 +100,10 @@ a {
 	padding: 3px 0;
 }
 
+.input_b{
+	margin-top: 10px;
+}
+
 .input_b, .input_ba {
 	display: inline-block;
 	width: 100%;
@@ -102,6 +112,11 @@ a {
 	padding: 8px;
 	font-size: 13px;
 	text-align: center;
+	cursor: pointer;
+}
+
+.input_b:hover, .input_ba:hover {
+	color: #b95c7a;
 }
 
 .input_ba {
@@ -114,10 +129,11 @@ a {
 }
 
 #login_form_wrap {
+	margin: auto;
 	text-align: left;
-	padding: 300px;
+	padding: 120px 0 100px 0;
 	width: 300px;
-	margin-top: -130px;
+	font-weight: bold;
 }
 
 #login_form_wrap h1 {
@@ -129,8 +145,16 @@ a {
 	padding: 5px 0;
 }
 
+.input_r input {
+	display: inline-block;
+	padding: 0px 10px;
+	font-size: 13px;
+}
+
+
 #footer {
 	font-size: 14px;
 	text-align: center;
-	padding: 50px 0 0 30px;
+	padding: 50px 0;
+	font-weight: normal;
 }

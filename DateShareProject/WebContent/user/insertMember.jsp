@@ -5,7 +5,7 @@
 <jsp:setProperty property="*" name="user"/>
 <%
 	InsertMemberService service = InsertMemberService.getInstance();
-	int cnt = service.insert(user);
+	service.insert(user);
 
 	response.sendRedirect("../index.jsp");
 %>

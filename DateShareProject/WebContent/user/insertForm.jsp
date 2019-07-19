@@ -17,46 +17,34 @@
 <div id="wrap">
     <div id="main_wrap">
         <div id="header">
-        	<%@include file="../frame/my.jsp" %>
             <%@include file="../frame/header.jsp" %>
         </div>
-        <div id="nav">
-            <%@include file="../frame/nav.jsp" %>
-        </div>
-        
         <div id="content">
-        	<h3>회원가입 페이지</h3>
-		<hr>
-		<form action="insertMember.jsp" method="post">
-		<table>
-			<tr>
-				<td>아이디(이메일)</td>
-				<td><input type="text" name="u_id" required> 
-					<input type="button" name="confirm_id" value="중복확인"></td>
-			</tr>
-			<tr>
-				<td>비밀번호</td>
-				<td><input type="password" name="u_pw" required> </td>
-			</tr>
-			<tr>
-				<td>이름</td>
-				<td><input type="text" name="u_name" required> </td>
-			</tr>
-			<tr>
-				<td>생년월일</td>
-				<td><input type="date" name="u_bday" required></td>
-             </tr>
-             <tr>
-             	<td>성별</td>
-             	<td><input type="radio" name=u_gender value="M">남자</td>
-             	<td><input type="radio" name=u_gender value="F">여자</td>
-             </tr>  
-			<tr>
-				<td></td>
-				<td><input type="submit" value="회원가입"> </td>
-			</tr>
-		</table>
-	</form>
+		<div id="login_form_wrap">
+					<h1>회원가입</h1>
+					<form action="insertMember.jsp" method="post">
+						<div>
+							ID<input class="input_t" type="text" name="u_id" required>
+						</div>
+						<div>
+							PW<input class="input_t" type="password" name="u_pw">
+						</div>
+						<div>
+							이름<input class="input_t" type="text" name="u_name" required>
+						</div>
+						<div>
+							생년월일<input class="input_t" type="date" name="u_bday" required>
+						</div>
+						<div>
+							성별 <br><span class="input_r"><input type="radio" name=u_gender value="M">남자</span>
+								<span class="input_r"><input type="radio" name=u_gender value="F">여자</span>
+						</div>
+						<div>
+							<input class="input_b" type="submit" value="회원가입">
+							<a href="../index.jsp" class="input_ba">이전으로</a>
+						</div>
+					</form>
+		</div>
 </div>
         <div id="footer">
             <%@include file="../frame/footer.jsp" %>

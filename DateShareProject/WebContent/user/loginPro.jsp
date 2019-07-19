@@ -1,3 +1,4 @@
+<%@page import="dateShare.Model.LoginInfo"%>
 <%@page import="dateShare.service.user.LoginService"%>
 <%@page import="dateShare.Model.DateUser"%>
 <%@page import="java.sql.ResultSet"%>
@@ -17,14 +18,18 @@
 	
 	if(dUser.getU_id() != null && dUser.getU_id().equals(u_id)){
 		
-		if(dUser.getU_pw() != null && dUser.getU_pw().equals(u_pw))
+		if(dUser.getU_pw() != null && dUser.getU_pw().equals(u_pw)){
+			session.setAttribute("userInfo", dUser.toLoginInfo());
+			
+			response.sendRedirect("../main.jsp");
+		}else {
+			out.print("<script> alert(\'아이디랑 패스워드를 확인하세요.\'); history.go(-1); </script>");	
+		}
 		
-		session.setAttribute("userInfo", dUser);
 		
-		response.sendRedirect("../main.jsp"); 
-
 	}else{
-		out.println("<script> alert(\'아이디랑 패스워드를 확인하세요.\'); history.go(-1); </script>");	
+		
+		out.print("<script> alert(\'아이디랑 패스워드를 확인하세요.\'); history.go(-1); </script>");	
 	}
 	
 	

@@ -12,7 +12,6 @@ import dateShare.Model.Message;
 import jdbc.JdbcUtil;
 
 public class MessageDao {
-
 	// 인스턴스 생성
 	private static MessageDao mDao = new MessageDao();
 
