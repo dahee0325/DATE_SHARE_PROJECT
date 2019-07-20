@@ -87,14 +87,13 @@ public class DateUserDao {
 
 	}
 
-
 	public int idCheck(Connection conn, String u_id) {
-		
+
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		
+
 		int check = 0;
-		
+
 		String sql = "select count(*) from dateuser where u_id=?";
 
 		try {
@@ -113,6 +112,143 @@ public class DateUserDao {
 		}
 
 		return check;
+	}
+
+	// 회원정보수정 메서드
+	public int update(Connection conn, DateUser dUser) {
+
+		int rCnt = 0;
+		PreparedStatement pstmt = null;
+
+		String sql = "update dateuser set u_pw=?, u_name=? where u_id=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, dUser.getU_pw());
+			pstmt.setString(2, dUser.getU_name());
+			pstmt.setString(3, dUser.getU_id());
+
+			rCnt = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+		return rCnt;
+	}
+
+	// 마이페이지 read 메서드
+	public DateUser read(Connection conn, DateUser dUser) {
+
+		DateUser dateuser = null;
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+
+		String sql = "select * from dateuser where u_id=?";
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dUser.getU_id());
+
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				dateuser = new DateUser();
+				dateuser.setU_num(rs.getInt("u_num"));
+				dateuser.setU_id(rs.getString("u_id"));
+				dateuser.setU_pw(rs.getString("u_pw"));
+				dateuser.setU_name(rs.getString("u_name"));
+				dateuser.setU_bday(rs.getString("u_bday"));
+				dateuser.setU_regdate(rs.getDate("u_regdate"));
+				dateuser.setU_gender(rs.getString("u_gender"));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return dateuser;
+	}
+
+	// 회원삭제(회원탈퇴메서드) - 회원의 게시글도 없애야함 / 각자 게시물 sql지우기
+	public int delete(Connection conn, DateUser dUser) {
+
+		int rCnt = 0;
+		PreparedStatement pstmt = null;
+
+		Statement stmt = null;
+
+		String sql2 = "delete from f_like where u_num=" + dUser.getU_num();
+		String sql3 = "delete from m_like where u_num=" + dUser.getU_num();
+		String sql4 = "delete from a_like where u_num=" + dUser.getU_num();
+		String sql5 = "delete from food where u_num=" + dUser.getU_num();
+		String sql6 = "delete from movie where u_num=" + dUser.getU_num();
+		String sql7 = "delete from activity where u_num=" + dUser.getU_num();
+		String sql8 = "delete from message where u_num=" + dUser.getU_num(); // 쪽지
+
+		String sql = "select u_pw from dateuser where u_id =?";
+		String sql1 = "delete from dateuser where u_id=?";
+
+		ResultSet rs = null;
+
+		try {
+
+			// prepareStatement 여러번 사용하는 방법
+
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dUser.getU_id());
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				System.out.println(123);
+				if (rs.getString("u_pw").equals(dUser.getU_pw())) {
+					System.out.println(456);
+					stmt = conn.createStatement();
+					System.out.println(789);
+
+					System.out.println("chk:::" + stmt.executeUpdate(sql2));
+					System.out.println("chk:::" + stmt.executeUpdate(sql3));
+					System.out.println("chk:::" + stmt.executeUpdate(sql4));
+					System.out.println("chk:::" + stmt.executeUpdate(sql5));
+					System.out.println("chk:::" + stmt.executeUpdate(sql6));
+					System.out.println("chk:::" + stmt.executeUpdate(sql7));
+					System.out.println("chk:::" + stmt.executeUpdate(sql8));
+					/*
+					 * System.out.println(10111); stmt.executeQuery(sql3); stmt.executeQuery(sql4);
+					 * System.out.println("efef"); stmt.executeQuery(sql5);
+					 * System.out.println("asdf"); stmt.executeQuery(sql6); stmt.executeQuery(sql7);
+					 * stmt.executeQuery(sql8);
+					 */
+
+					pstmt = conn.prepareStatement(sql1);
+					pstmt.setString(1, dUser.getU_id());
+					rCnt = pstmt.executeUpdate();
+
+					System.out.println("회원탈퇴가 성공했습니다.");
+
+				} else {
+
+					System.out.println("비밀번호가 틀렸습니다.");
+
+				}
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return rCnt;
 	}
 
 }
