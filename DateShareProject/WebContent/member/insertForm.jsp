@@ -36,6 +36,28 @@ $(document).ready(function () {
                     }
                 });
         	});
+		
+		$('#insertForm').submit(function() {
+			$.ajax({
+                url: 'insertMember.jsp',
+                type: 'GET',
+                data: {
+                    u_id: $('#u_id').val(),
+                    u_pw: $('#u_pw').val(),
+                    u_name: $('#u_name').val(),
+                    u_bday: $('#u_bday').val(),
+                    name: $('input[name=u_gender]').val()
+                },
+                success: function (data) {
+                		alert("회원가입되었습니다.\n로그인해주세요.");
+                		//location.replace("../index.jsp");
+                		history.go(-1);
+                }
+                
+            });
+			
+		});
+		
 });
     </script>
 </head>
@@ -48,7 +70,7 @@ $(document).ready(function () {
 			<div id="content">
 				<div id="login_form_wrap">
 					<h1>회원가입</h1>
-					<form action="insertMember.jsp" method="post">
+					<form id="insertForm" action="insertMember.jsp" method="post">
 						<div>
 							ID<input class="input_t" id="u_id" type="text" name="u_id" required>
 							<h5 id="idchkMsg"></h5>
@@ -64,9 +86,8 @@ $(document).ready(function () {
 						</div>
 						<div>
 							성별 <br>
-							<span class="input_r"><input type="radio" name=u_gender
-								value="M">남자</span> <span class="input_r"><input
-								type="radio" name=u_gender value="F">여자</span>
+							<span class="input_r"><input type="radio" name="u_gender" value="M">남자</span>
+							<span class="input_r"><input type="radio" name="u_gender" value="F">여자</span>
 						</div>
 						<div>
 							<input class="input_b" type="submit" value="회원가입"> <a

@@ -68,5 +68,51 @@ public class GetMessageListService {
 			
 			return view;
 		}
+		
+		
+		public MessageListView getSendMessageList(int pageNumber, int u_num) {
+			
+			//2. 현재 페이지 번호
+			int currentPageNumber = pageNumber;
+			
+			Connection conn;
+			
+			MessageListView view = null;
+			
+			try {
+				// Connection
+				conn = ConnectionProvider.getConnection();
+				
+				//DAO
+				MessageDao dao = MessageDao.getInstance();
+				
+				//전체 게시물의 개수
+				int messageTotalCount = dao.sendSelectCount(conn, u_num);
+				
+				//게시물 내용 리스트, DB 검색에 사용할 start_row, end_row 구하기
+				List<Message> messageList = null;
+				int firstRow = 0;
+				int endRow = 0;
+				
+				if(messageTotalCount > 0) {
+					//있다면
+					firstRow = (pageNumber-1)*MESSAGE_COUNT_PER_PAGE + 1;
+					endRow = firstRow + MESSAGE_COUNT_PER_PAGE -1;
+					
+					messageList = dao.sendSelectList(conn, firstRow, endRow, u_num);
+				}else {
+					//0일때
+					currentPageNumber = 0;
+					messageList = Collections.emptyList();
+				}
+				
+				view = new MessageListView(messageTotalCount, currentPageNumber, messageList, MESSAGE_COUNT_PER_PAGE, firstRow, endRow);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			return view;
+		}
 	
 }

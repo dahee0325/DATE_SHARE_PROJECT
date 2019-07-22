@@ -16,7 +16,7 @@
 	}
 
 	//핵심 처리할 서비스 객체
-	GetMessageListService get_service = GetMessageListService.getInstance();
+	GetMessageListService service = GetMessageListService.getInstance();
 %>
 <!DOCTYPE html>
 <html>
@@ -29,24 +29,6 @@
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
-function deleteM(id) {
-	
-	if(confirm("정말로 삭제하시겠습니까?")) {
-		
-		$.ajax({
-            url: 'deleteMessage.jsp',
-            type: 'GET',
-            data: {
-            	m_num: id
-            },
-            success: function (data) {
-            	alert("메세지가 삭제되었습니다.");
-            	location.reload();
-            }
-        });
-	}
-	
-}
 
 </script>
 </head>
@@ -65,7 +47,7 @@ function deleteM(id) {
 					<h2>MESSAGE LIST</h2>
 				</div>
 				<p id="m">
-					<a class="m_btn" href="sandMessageList.jsp">보낸메세지함</a>
+					<a class="m_btn" href="messageList.jsp">받은메세지함</a>
 					<a class="m_btn" href="messageSend.jsp">쪽지보내기</a>
 				</p>
 				<div id="list_wrap">
@@ -73,18 +55,18 @@ function deleteM(id) {
 						<tr>
 							<td>No</td>
 							<td>제목</td>
-							<td>보낸사람</td>
-							<td>받은날짜</td>
+							<td>받는사람</td>
+							<td>보낸날짜</td>
 							<td></td>
 						</tr>
 						<%
 							//응답 데이터의 결과
-							MessageListView viewData = get_service.getMessageList(pageNumber, user.getU_id());
+							MessageListView viewData = service.getSendMessageList(pageNumber, user.getU_num());
 						
 							if (viewData.isEmpty()) {
 						%>
 						<tr>
-							<td colspan="5">받은 메세지가 없습니다.</td>
+							<td colspan="5">보낸 메세지가 없습니다.</td>
 						</tr>
 
 						<%
@@ -94,9 +76,9 @@ function deleteM(id) {
 						<tr>
 							<td><%=message.getRownum()%></td>
 							<td><a href="messageShow.jsp?m_num=<%= message.getM_num() %>"><%=message.getM_title()%></a></td>
-							<td><%=message.getU_name()%></td>
+							<td><%=message.getM_to()%></td>
 							<td><%=message.getM_writedate()%></td>
-							<td><a onclick="deleteM(<%= message.getM_num() %>)">삭제하기</a></td>
+							<td></td>
 						</tr>
 						<%
 						}

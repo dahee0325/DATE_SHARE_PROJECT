@@ -13,8 +13,15 @@ public class Message {
 	private String m_content; //쪽지내용
 	private Date m_writedate; //보낸시간
 	private String m_date; //형식이 바뀐 시간
+	private int rownum;
 	
 	
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
 	public String getM_to() {
 		return m_to;
 	}
