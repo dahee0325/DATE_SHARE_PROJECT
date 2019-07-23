@@ -62,7 +62,7 @@ function deleteM(id) {
 			</div>
 			<div id="content">
 				<div id="content_title">
-					<h2>MESSAGE LIST</h2>
+					<h2>RECEIVED MESSAGE LIST</h2>
 				</div>
 				<p id="m">
 					<a class="m_btn" href="sandMessageList.jsp">보낸메세지함</a>
@@ -78,7 +78,6 @@ function deleteM(id) {
 							<td></td>
 						</tr>
 						<%
-							//응답 데이터의 결과
 							MessageListView viewData = get_service.getMessageList(pageNumber, user.getU_id());
 						
 							if (viewData.isEmpty()) {

@@ -12,10 +12,9 @@ import dateShare.Model.Message;
 import jdbc.JdbcUtil;
 
 public class MessageDao {
-	// 인스턴스 생성
+
 	private static MessageDao mDao = new MessageDao();
 
-	// 외부에서 dao 객체를 가져갈수있도록 처리 : 싱글톤
 	public static MessageDao getInstance() {
 		return mDao;
 	}
@@ -166,7 +165,8 @@ public class MessageDao {
 				+ "select rownum rnum, m_num, u_num, m_title, m_content,m_writedate,m_to from ("
 				+ "select * from message m) where rownum <= ? "
 				+ ")join dateuser d using(u_num) where rnum >= ? and m_num in("
-				+ "select m.m_num from message m, dateuser d where m.u_num = d.u_num and m.m_to = ?) order by m_writedate desc";
+				+ "select m.m_num from message m, dateuser d where m.u_num = d.u_num and m.m_to = ?)"
+				+ " order by m_writedate desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -201,8 +201,7 @@ public class MessageDao {
 
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
-		
-		// 결과가져오는 변수
+
 		int totalCnt = 0;
 
 		String sql = "select count(*) from message join dateuser using(u_num) where u_num = ?";

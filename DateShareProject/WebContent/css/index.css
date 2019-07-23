@@ -12,13 +12,32 @@ html {
 	background-size: cover;
 }
 
-
 a {
 	text-decoration: none;
 	color: black;
 }
 
+a: hover,
+a: active {
+	text-decoration: none;
+}
 
+body {
+	background-color: transparent;
+}
+
+#wrap {
+	background-color: transparent;
+}
+#content {
+	background-color: transparent;
+}
+
+.carousel {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  height: 400px;
+}
 
 #main_wrap {
 	width: 980px;
@@ -67,6 +86,7 @@ a {
 	list-style: none;
 	overflow: hidden;
 	color: black;
+    margin-bottom: 0;
 }
 
 #nav ul>li {
@@ -100,10 +120,6 @@ a {
 	padding: 3px 0;
 }
 
-.input_b{
-	margin-top: 10px;
-}
-
 .input_b, .input_ba {
 	display: inline-block;
 	width: 100%;
@@ -112,11 +128,6 @@ a {
 	padding: 8px;
 	font-size: 13px;
 	text-align: center;
-	cursor: pointer;
-}
-
-.input_b:hover, .input_ba:hover {
-	color: #b95c7a;
 }
 
 .input_ba {
@@ -150,6 +161,7 @@ a {
 	padding: 0px 10px;
 	font-size: 13px;
 }
+
 
 
 #footer {

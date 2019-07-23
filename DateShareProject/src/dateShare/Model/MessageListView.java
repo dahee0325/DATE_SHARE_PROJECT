@@ -5,7 +5,7 @@ import java.util.List;
 public class MessageListView {
 
 	private int messageTotalCount;
-	private int currentPageNumber;//현재페이지 넘버가 무엇으로 되어있는지
+	private int currentPageNumber;//현재페이지의 넘버
 	private List<Message> messageList;
 	private int pageTotalCount;
 	private int messageCountPerPage;

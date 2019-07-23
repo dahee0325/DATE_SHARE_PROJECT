@@ -3,8 +3,7 @@
 <%@page import="dateShare.Model.Message"%>
 <%@page import="dateShare.Model.MessageListView"%>
 <%@page import="dateShare.service.message.GetMessageListService"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	String pageNumberstr = request.getParameter("page");
 
@@ -28,9 +27,7 @@
 <style>
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script>
-
-</script>
+<script></script>
 </head>
 <body>
 	<div id="wrap">
@@ -44,7 +41,7 @@
 			</div>
 			<div id="content">
 				<div id="content_title">
-					<h2>MESSAGE LIST</h2>
+					<h2>SAND MESSAGE LIST</h2>
 				</div>
 				<p id="m">
 					<a class="m_btn" href="messageList.jsp">받은메세지함</a>
