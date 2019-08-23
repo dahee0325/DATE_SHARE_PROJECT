@@ -162,8 +162,8 @@ public class MessageDao {
 		ResultSet rs = null;
 
 		String sql = "select rownum, m_num, u_name, u_id, m_title, m_writedate from(select m_num, u_name, u_id, m_title, m_writedate from "
-				+ "(select rownum rn,u_num, m_num, m_title, m_writedate,m_to from(select * from message m) where rownum <= ?) join dateuser d using(u_num) "
-				+ "where m_to=? and rn >= ? order by m_writedate) order by rownum desc";
+	            + "(select rownum rn,u_num, m_num, m_title, m_writedate,m_to from(select * from message m) where rownum <= ?) join dateuser d using(u_num) "
+	            + "where m_to=? and rn >= ? order by m_writedate) order by rownum desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -233,15 +233,14 @@ public class MessageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
-		String sql = "select rownum, m_num, m_to, m_title, m_writedate from(select m_num, m_to, u_id, m_title, m_writedate from "
-				+ "(select rownum rn,u_num, m_num, m_title, m_writedate,m_to from(select * from message m) where rownum <= ?) join dateuser d using(u_num) "
-				+ "where u_num=? and rn >= ? order by m_writedate) order by rownum desc";
+		String sql = "select rownum, m_num,m_to,m_title,m_writedate from(select rownum rnum, m_num, u_num, m_title, m_content,m_writedate,m_to from "
+				+ "(select * from message m) where rownum <= ?) where rnum >= ? and u_num = ? order by m_writedate desc";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, endRow);
-			pstmt.setInt(3, firstRow);
-			pstmt.setInt(2, u_num);
+			pstmt.setInt(2, firstRow);
+			pstmt.setInt(3, u_num);
 			 
 
 			rs = pstmt.executeQuery();

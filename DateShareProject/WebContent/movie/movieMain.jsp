@@ -1,3 +1,4 @@
+<%@page import="dateShare.service.movie.GetLikeService"%>
 <%@page import="java.util.List"%>
 <%@page import="dateShare.Model.Movie"%>
 <%@page import="dateShare.service.movie.GetArticleListService"%>
@@ -10,7 +11,13 @@
 	GetArticleListService service = GetArticleListService.getInstance();
 	
 	//응답 데이터의 결과 
-	List<Movie> movieList = service.getArticleList();	
+	List<Movie> movieList = service.getArticleList();
+	
+	
+	//좋아요 개수
+	int likeOriginCnt = 0;
+	
+	GetLikeService likeservice = GetLikeService.getInstance(); 
 	
 %>
 
@@ -21,12 +28,12 @@
     <title>DATE SHARE | MOVIE</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
 <link href="../css/index.css" rel="stylesheet" type="text/css">
-<style>
-	body {
-		background-color: transparent;
-	}
-</style>
+<link href="../css/movie.css" rel="stylesheet" type="text/css">
+
+<script src="https://kit.fontawesome.com/744ccfa256.js"></script>
+<style></style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 </head>
 <body>
@@ -39,49 +46,55 @@
         <div id="nav">
             <%@ include file="../frame/nav.jsp" %>
         </div>
+		
         <div id="content" class ="album py-5">
-            <div id="contentList" class="container">   
+        
+            <div id="contentList" class="container">  
             	<div class="row">   
             	<%
             		if(movieList.isEmpty()) {
-            			out.println("등록된 게시글이 없습니다.");
-            			
+            			%>
+            			<h4 class="center">등록된 게시글이 없습니다.</h4>
+            			<%           			
             		} else {
             			for(Movie movie : movieList) {            			
-            			%>          				
+            			%>                				
             				<div class="col-md-4">
+            				<a href="movieContentView.jsp?articleNum=<%= movie.getM_num() %>"> 
             				<div class="card mb-4 shadow-sm">
-	            				<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+	            				<svg class="bd-placeholder-img card-img-top" width="100%" height="200" 
+	            					xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
 	            					<image xlink:href="<%= movie.getM_path() %>" width="100%" height="225">
 	            				</svg> 
 	            				<div class="card-body">
 	            				 <p class="card-text">
-	            				 	제목 <%= movie.getM_title() %><br>
-	           						조회수 <%= movie.getM_hits() %>
-	           						좋아요 
-	            				 </p> 
+	            				 	<strong>제목</strong> <%= movie.getM_title() %><br>
+	            				 	<strong>작성자</strong> <%= movie.getU_name() %><br>
+	           						<strong>조회수</strong> <%= movie.getM_hits() %> 
+	           						<strong>좋아요</strong><i class="fas fa-heart"></i>
+	           						<%= likeOriginCnt = likeservice.getLikeOrigin(movie.getM_num()) %>	           	
+	            				  </p> 
 	            				 <div class="d-flex justify-content-between align-items-center">
-					                <div class="btn-group">
-					                  <a href="movieContentView.jsp?articleNum=<%= movie.getM_num() %>">
-					                  	<button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-					                  </a>
-					                  <a href="movieEditView.jsp?articleNum=<%= movie.getM_num() %>">
-					                  	<button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-					                  </a>
-					                </div>
+	            				 	<div>
+	            				 		<i class="fas fa-star"></i>
+	            				 		<%= movie.getM_star() %>
+	            				 	</div> 	
 					                <small class="text-muted"><%= movie.getM_writedate() %></small>
-					              </div>        				            			
+					            </div>        				            			
 		            			</div>
             				</div>
+            				</a>
             				</div>
+            				
             			<%
             			}
             		}
             	%>
             	</div>
-            </div>
-
-            <a href="movieWrite.jsp"><input type="button" value="콘텐츠 등록하기"></a> 
+            	
+            	<a href="movieWrite.jsp" class="btn btn-md btn-outline-secondary btn-center">새 콘텐츠 등록하기</a> 
+            	
+            </div>         
         </div>
         <div id="footer">
             <%@ include file="../frame/footer.jsp" %>
