@@ -120,9 +120,6 @@ CREATE TABLE message (
 CREATE SEQUENCE message_seq
 MINVALUE 0;
 
-
-
-
 select message_sep.currval from dateuser;
 
 drop SEQUENCE message_seq;
@@ -146,6 +143,11 @@ select u_name
 from dateuser join message
 using(u_num);
 
+insert into message (m_num, m_title, m_content, m_to) values(message_seq.nextval,'안녕하세요', 'ㅎㅇㅎㅇㅎㅇㅎㅇ내용', 'dahee');
+
+select * from message where m_num=28;
+
+delete message where m_num = 27;
 
 -------------------------------------------------------------------------------
 
@@ -234,7 +236,7 @@ CREATE TABLE m_like (
 
 -------------------------------------------------------------------------------
 
-select * from dateuser;
+select * from dateuser join message using(u_num);
 select * from dateuser join food using(u_num);
 select * from dateuser join movie using(u_num);
 select * from dateuser join activity using(u_num);
@@ -312,3 +314,8 @@ insert INTO food values (food_seq.nextVal, 3, '멍멍이야2','왈왈2', sysdate
 select * from food;
 
 commit;
+----------------------------------
+delete from dateuser where u_num=2;
+select * from food;
+select * from dateuser;
+
