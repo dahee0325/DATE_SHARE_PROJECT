@@ -2,12 +2,18 @@
 > Html5, Css3, Javascript, JQuery, Jsp, Oracle DB, Ajax 를 이용해 만든 데이트 콘텐츠 공유 플랫폼
 <img src="ProjectFlow.png">
 
-## 목차 
+## 원본 깃허브
+* [LINK](https://github.com/Miniminis/Date-Share-Project)
+
+## 목차
 * 회원가입/로그인/로그아웃/회원탈퇴
 * 마이페이지
 * 맛집 게시판
 * 엑티비티 게시판
 * 영화 게시판
+* 쪽지
+
+## 맡은부분
 * 쪽지
 
 ## 기술 
